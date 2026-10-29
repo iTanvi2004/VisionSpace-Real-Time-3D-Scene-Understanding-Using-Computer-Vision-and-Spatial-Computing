@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisionSpace - Real-Time 3D Scene Understanding</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- Three.js & OrbitControls for interactive 3D WebGL -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-orb"></div>
+        <div>
+          <h1>VisionSpace</h1>
+          <p class="subtitle">Real-Time 3D Scene Understanding & Spatial Computing</p>
+        </div>
+      </div>
+      <div class="status-bar">
+        <span class="badge live-badge"><span class="dot pulse"></span> LIVE STREAM</span>
+        <span class="badge fps-badge" id="fps-display">FPS: --</span>
+        <span class="badge tech-badge">YOLOv11 + MiDaS + Open3D</span>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="content-grid">
+      <!-- Left Panel: Live Multi-Pane Video Feed -->
+      <section class="panel video-panel">
+        <div class="panel-header">
+          <h2><i data-lucide="video"></i> Computer Vision Multi-Pane Stream</h2>
+          <span class="tag">RGB + Depth + BEV Radar</span>
+        </div>
+        <div class="video-wrapper">
+          <img src="/video_feed" alt="VisionSpace Live Feed" id="video-stream" onerror="this.src='https://placehold.co/640x360/151820/00d2ff?text=Stream+Standby...'">
+        </div>
+        
+        <!-- Live Scene Telemetry Banner -->
+        <div class="telemetry-banner" id="telemetry-banner">
+          <div class="telemetry-item">
+            <span class="label">Scene Classification</span>
+            <span class="value" id="scene-type">Analyzing scene...</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="label">Tracked Entities</span>
+            <span class="value" id="object-count">0</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="label">Nearest Obstacle</span>
+            <span class="value" id="nearest-obstacle">None</span>
+          </div>
+        </div>
+
+        <!-- Hazard Alert Box -->
+        <div class="hazard-alert safe" id="hazard-box">
+          <i data-lucide="shield-check" id="hazard-icon"></i>
+          <span id="hazard-text">Path Clear - No Immediate Proximity Hazards</span>
+        </div>
+
+        <!-- Situational Narrative -->
+        <div class="narrative-card">
+          <div class="card-title"><i data-lucide="sparkles"></i> Spatial Situational Narrative</div>
+          <p id="narrative-text">Initializing deep learning perception pipeline...</p>
+        </div>
+      </section>
+
+      <!-- Right Panel: Interactive 3D WebGL Scene -->
+      <section class="panel scene-panel">
+        <div class="panel-header">
+          <h2><i data-lucide="box"></i> Interactive 3D Scene Reconstruction</h2>
+          <div class="panel-controls">
+            <button class="btn btn-sm" id="btn-reset-cam" title="Reset View"><i data-lucide="rotate-ccw"></i> Reset View</button>
+            <button class="btn btn-sm btn-primary" id="btn-export-ply"><i data-lucide="download"></i> Export .PLY</button>
+          </div>
+        </div>
+
+        <!-- 3D WebGL Canvas Container -->
+        <div id="threejs-container">
+          <div class="canvas-overlay">
+            <div class="legend">
+              <span class="legend-item"><span class="color-dot red"></span> Critical (&lt;0.9m)</span>
+              <span class="legend-item"><span class="color-dot yellow"></span> Caution (0.9-1.8m)</span>
+              <span class="legend-item"><span class="color-dot green"></span> Safe (&gt;1.8m)</span>
+            </div>
+            <div class="instruction">
+              <i data-lucide="mouse-pointer"></i> Left-Click + Drag: Orbit | Right-Click: Pan | Scroll: Zoom
+            </div>
+          </div>
+        </div>
+
+        <!-- Active 3D Objects List -->
+        <div class="objects-list-wrapper">
+          <div class="list-title"><i data-lucide="crosshair"></i> Detected 3D Spatial Entities</div>
+          <div class="objects-table-container">
+            <table class="objects-table">
+              <thead>
+                <tr>
+                  <th>Object</th>
+                  <th>Distance</th>
+                  <th>3D Position (X, Y, Z)</th>
+                  <th>Bearing</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="objects-table-body">
+                <tr><td colspan="5" class="empty-state">No objects detected yet</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div>VisionSpace Framework &bull; Goel Institute of Technology & Management &bull; AIML Department</div>
+      <div>Real-Time Monocular 3D Reconstruction &bull; Academic Research Prototype</div>
+    </footer>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+# Python Bytecode and Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / Packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Ultralytics & Model Cache
+runs/
+*.pt
+*.pth
+*.onnx
+.cache/
+
+# VisionSpace Outputs (Preserve outputs directory structure)
+outputs/*
+!outputs/.gitkeep
+!outputs/sample_output.ply
+
+# IDE & Editor specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
